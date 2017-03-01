@@ -15,4 +15,5 @@
 void	ft_fractol(t_fr *fr)
 {
 	(fr->flag == 1) ? ft_mandel(fr) : 23;
+	(fr->flag == 2) ? ft_julia(fr) : 23;
 }

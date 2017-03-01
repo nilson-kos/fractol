@@ -12,6 +12,20 @@
 
 #include "fractol.h"
 
+t_fr		*ft_init_fr_key(t_fr *fr)
+{
+	fr->key.l = 0;
+	fr->key.r = 0;
+	fr->key.t = 0;
+	fr->key.b = 0;
+	fr->key.pzoom = 0;
+	fr->key.mzoom = 0;
+	fr->key.piter = 0;
+	fr->key.miter = 0;
+	fr->key.move = 1;
+	return (fr);
+}
+
 t_fr		*ft_init_fr(int flag)
 {
 	t_fr	*fr;
@@ -19,7 +33,7 @@ t_fr		*ft_init_fr(int flag)
 	fr = (t_fr *)malloc(sizeof(t_fr));
 	fr->i = 0;
 	fr->flag = flag;
-	fr->color = 0x11111111;
+	fr->color = 0xFF0000;
 	fr->w_size_x = 800;
 	fr->w_size_y = 800;
 	fr->mlx = mlx_init();
@@ -27,7 +41,12 @@ t_fr		*ft_init_fr(int flag)
 	fr->shifty = 0.0;
 	fr->zoom = 4.0;
 	fr->iter = 20;
+	fr->mouseshifty = 0.0;
+	fr->mouseshiftx = 0.0;
+	fr->movex = 0.365;
+	fr->movey = 0.01;
 	fr->win = mlx_new_window(fr->mlx, fr->w_size_x, fr->w_size_y, "LC");
 	fr->img = mlx_new_image(fr->mlx, fr->w_size_x, fr->w_size_y);
+	fr = ft_init_fr_key(fr);
 	return (fr);
 }

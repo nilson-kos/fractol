@@ -37,6 +37,7 @@ typedef struct		s_key
 	int				mzoom;
 	int				piter;
 	int				miter;
+	int				move;
 }					t_key;
 
 typedef struct		s_fr
@@ -58,6 +59,10 @@ typedef struct		s_fr
 	float			shifty;
 	float			zoom;
 	int				iter;
+	float			mouseshifty;
+	float			mouseshiftx;
+	float			movex;
+	float			movey;
 	struct s_color	cl;
 	struct s_key	key;
 }					t_fr;
@@ -66,6 +71,7 @@ int		ft_check_flag(char *str);
 t_fr	*ft_init_fr(int flag);
 void	ft_fractol(t_fr *fr);
 void	ft_mandel(t_fr *fr);
+void	ft_julia(t_fr *fr);
 int		ft_shake_color(t_fr *fr);
 int		ft_zaloop_hook(t_fr *fr);
 void	ft_pix_put(t_fr *fr, int x, int y, int rgb);
