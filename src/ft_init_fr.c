@@ -23,6 +23,7 @@ t_fr		*ft_init_fr_key(t_fr *fr)
 	fr->key.piter = 0;
 	fr->key.miter = 0;
 	fr->key.move = 1;
+	fr->key.clr = 0;
 	return (fr);
 }
 
@@ -31,9 +32,10 @@ t_fr		*ft_init_fr(int flag)
 	t_fr	*fr;
 
 	fr = (t_fr *)malloc(sizeof(t_fr));
+	fr->trash = 0;
 	fr->i = 0;
 	fr->flag = flag;
-	fr->color = 0xFF0000;
+	fr->color = 0x111111;
 	fr->w_size_x = 800;
 	fr->w_size_y = 800;
 	fr->mlx = mlx_init();

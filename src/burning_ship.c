@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   burning_ship.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshcherb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/28 16:30:27 by kshcherb          #+#    #+#             */
-/*   Updated: 2017/03/01 20:10:39 by kshcherb         ###   ########.fr       */
+/*   Created: 2017/03/01 17:30:59 by kshcherb          #+#    #+#             */
+/*   Updated: 2017/03/01 20:09:24 by kshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static void	ft_print_pix(int x, int y, t_fr *fr)
 
 	fr->x0 = ((x - 800. / 2) * fr->zoom) / 800. + fr->shiftx;
 	fr->y0 = ((y - 800. / 2) * fr->zoom) / 800. + fr->shifty;
-	fr->x = fr->x0;
-	fr->y = fr->y0;
+	fr->x = 0.0;
+	fr->y = 0.0;
 	fr->i = 0;
 	fr->max_i = fr->iter;
 	while (fr->x * fr->x + fr->y * fr->y < 4 && fr->i < fr->max_i)
 	{
-		xtemp = fr->x * fr->x - fr->y * fr->y - fr->movex;
-		fr->y = 2 * fr->x * fr->y + fr->movey;
+		xtemp = fr->x * fr->x - fr->y * fr->y + fr->x0;
+		fr->y = fabs(2 * fr->x * fr->y) + fr->y0;
 		fr->x = xtemp;
 		fr->i += 1;
 	}
@@ -36,7 +36,7 @@ static void	ft_print_pix(int x, int y, t_fr *fr)
 		ft_pix_put(fr, x, y, 0);
 }
 
-void		ft_julia(t_fr *fr)
+void		ft_burning_ship(t_fr *fr)
 {
 	int		x;
 	int		y;

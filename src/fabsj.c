@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   fabsj.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshcherb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/28 16:30:27 by kshcherb          #+#    #+#             */
-/*   Updated: 2017/03/01 20:10:39 by kshcherb         ###   ########.fr       */
+/*   Created: 2017/03/01 19:47:25 by kshcherb          #+#    #+#             */
+/*   Updated: 2017/03/01 20:09:56 by kshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_print_pix(int x, int y, t_fr *fr)
 	fr->max_i = fr->iter;
 	while (fr->x * fr->x + fr->y * fr->y < 4 && fr->i < fr->max_i)
 	{
-		xtemp = fr->x * fr->x - fr->y * fr->y - fr->movex;
+		xtemp = fabs(fr->x * fr->x - fr->y * fr->y) - fr->movex;
 		fr->y = 2 * fr->x * fr->y + fr->movey;
 		fr->x = xtemp;
 		fr->i += 1;
@@ -36,7 +36,7 @@ static void	ft_print_pix(int x, int y, t_fr *fr)
 		ft_pix_put(fr, x, y, 0);
 }
 
-void		ft_julia(t_fr *fr)
+void		ft_fabsj(t_fr *fr)
 {
 	int		x;
 	int		y;

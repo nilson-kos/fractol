@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   bio.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshcherb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/28 16:30:27 by kshcherb          #+#    #+#             */
-/*   Updated: 2017/03/01 20:10:39 by kshcherb         ###   ########.fr       */
+/*   Created: 2017/03/01 18:21:28 by kshcherb          #+#    #+#             */
+/*   Updated: 2017/03/01 20:15:07 by kshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,24 @@ static void	ft_print_pix(int x, int y, t_fr *fr)
 	fr->x = fr->x0;
 	fr->y = fr->y0;
 	fr->i = 0;
-	fr->max_i = fr->iter;
-	while (fr->x * fr->x + fr->y * fr->y < 4 && fr->i < fr->max_i)
+	fr->max_i = 50;
+	while (fr->x * fr->x < 70 && fr->y * fr->y < 70 && fr->i < fr->max_i)
 	{
-		xtemp = fr->x * fr->x - fr->y * fr->y - fr->movex;
-		fr->y = 2 * fr->x * fr->y + fr->movey;
+		xtemp = fr->x * fr->x * fr->x * fr->x - fr->y * fr->y *
+			fr->y * fr->y - 6 * fr->x * fr->x * fr->y * fr->y + 1;
+		fr->y = 4 * fr->x * fr->x * fr->x * fr->y -
+			4 * fr->x * fr->y * fr->y * fr->y + 1;
 		fr->x = xtemp;
-		fr->i += 1;
+		fr->i++;
 	}
-	fr->color = ft_shake_color(fr);
-	if (fr->i < fr->max_i)
-		ft_pix_put(fr, x, y, fr->color);
+	fr->color = 27200;
+	if (fabs(fr->x) > 10 * fr->max_i / 50 || fabs(fr->y) > 800 * fr->max_i / 50)
+		ft_pix_put(fr, x, y, fr->color * fr->i);
 	else
 		ft_pix_put(fr, x, y, 0);
 }
 
-void		ft_julia(t_fr *fr)
+void		ft_bio(t_fr *fr)
 {
 	int		x;
 	int		y;

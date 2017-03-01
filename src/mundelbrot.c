@@ -6,7 +6,7 @@
 /*   By: kshcherb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 13:17:29 by kshcherb          #+#    #+#             */
-/*   Updated: 2017/02/23 21:27:56 by kshcherb         ###   ########.fr       */
+/*   Updated: 2017/03/01 20:13:02 by kshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_print_pix(int x, int y, t_fr *fr)
 	fr->max_i = fr->iter;
 	while (fr->x * fr->x + fr->y * fr->y < 4 && fr->i < fr->max_i)
 	{
-		xtemp = fr->x * fr->x - fr->y *	fr->y + fr->x0;
+		xtemp = fr->x * fr->x - fr->y * fr->y + fr->x0;
 		fr->y = 2 * fr->x * fr->y + fr->y0;
 		fr->x = xtemp;
 		fr->i += 1;
@@ -36,10 +36,10 @@ static void	ft_print_pix(int x, int y, t_fr *fr)
 		ft_pix_put(fr, x, y, 0);
 }
 
-void	ft_mandel(t_fr *fr)
+void		ft_mandel(t_fr *fr)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	x = 0;
 	y = 0;

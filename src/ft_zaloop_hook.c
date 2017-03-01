@@ -6,7 +6,7 @@
 /*   By: kshcherb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 18:15:22 by kshcherb          #+#    #+#             */
-/*   Updated: 2017/02/23 18:49:38 by kshcherb         ###   ########.fr       */
+/*   Updated: 2017/03/01 20:18:32 by kshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int		button_press(int kcode, t_fr *fr)
 {
 	(kcode == 53) ? exit(0) : 1;
-	(kcode == 49) ? fr->key.move += 1 : 1;
+	if (kcode == 8)
+		fr->trash = ft_change_color(fr);
+	if (kcode == 49)
+		ft_return_norm(fr);
 	(kcode == 29) ? fr->shiftx = 0 : 1;
 	(kcode == 29) ? fr->shifty = 0 : 1;
 	(kcode == 123) ? fr->key.l = 1 : 23;
@@ -45,40 +48,42 @@ int		button_release(int kcode, t_fr *fr)
 int		mouse_release(int kcode, int x, int y, t_fr *fr)
 {
 	if (kcode == 4)
- 	{
-			fr->mouseshifty = ((y - 400.) / 800.) * fr->zoom;
-			fr->shifty += fr->mouseshifty;
-			fr->mouseshiftx = ((x - 400.) / 800.) * fr->zoom;
-			fr->shiftx += fr->mouseshiftx;
-			fr->zoom /= 1.05;
-			fr->shiftx -= ((x - 400.) / 800.) * fr->zoom;
-			fr->shifty -= ((y - 400.) / 800.) * fr->zoom;
+	{
+		fr->mouseshifty = ((y - 400.) / 800.) * fr->zoom;
+		fr->shifty += fr->mouseshifty;
+		fr->mouseshiftx = ((x - 400.) / 800.) * fr->zoom;
+		fr->shiftx += fr->mouseshiftx;
+		fr->zoom /= 1.05;
+		fr->shiftx -= ((x - 400.) / 800.) * fr->zoom;
+		fr->shifty -= ((y - 400.) / 800.) * fr->zoom;
 	}
 	if (kcode == 5)
 	{
-			fr->mouseshifty = ((y - 400.) / 800.) * fr->zoom;
-			fr->shifty += fr->mouseshifty;
-			fr->mouseshiftx = ((x - 400.) / 800.) * fr->zoom;
-			fr->shiftx += fr->mouseshiftx;
-			fr->zoom *= 1.05;
-			fr->shiftx -= ((x - 400.) / 800.) * fr->zoom;
-			fr->shifty -= ((y - 400.) / 800.) * fr->zoom;
+		fr->mouseshifty = ((y - 400.) / 800.) * fr->zoom;
+		fr->shifty += fr->mouseshifty;
+		fr->mouseshiftx = ((x - 400.) / 800.) * fr->zoom;
+		fr->shiftx += fr->mouseshiftx;
+		fr->zoom *= 1.05;
+		fr->shiftx -= ((x - 400.) / 800.) * fr->zoom;
+		fr->shifty -= ((y - 400.) / 800.) * fr->zoom;
 	}
+	(kcode == 1) ? fr->key.move += 1 : 1;
 	return (0);
 }
 
 int		mouse_move(int x, int y, t_fr *fr)
 {
-			if (fr->key.move % 2 == 0)
-			{
-				fr->movex = (x * 1. - 800 / 2) / 800 + 0.9337;
-				fr->movey = (y * 1. - 800 / 2) / 800 + 0.228;
-			}
-			return (0);
+	if (fr->key.move % 2 == 0)
+	{
+		fr->movex = (x * 1. - 800 / 2) / 800 + 0.9337;
+		fr->movey = (y * 1. - 800 / 2) / 800 + 0.228;
+	}
+	return (0);
 }
+
 /*
 **	93 - arrows
-**	92 - zoom(dont work)
+**	92 - zoom
 **  91 - amount of iterations
 **	90 - mouse zoom
 */
@@ -93,9 +98,10 @@ int		ft_zaloop_hook(t_fr *fr)
 	(fr->key.mzoom != 0) ? fr->zoom *= 1.05 : 92;
 	(fr->key.miter != 0) ? fr->iter -= 1 : 91;
 	(fr->key.piter != 0) ? fr->iter += 1 : 91;
- 	mlx_hook(fr->win, 2, 1, button_press, fr);
+	mlx_hook(fr->win, 2, 1, button_press, fr);
 	mlx_hook(fr->win, 3, 2, button_release, fr);
-	(fr->flag == 2 )? mlx_hook(fr->win, 6, 65, mouse_move, fr) : 90;
+	(fr->flag == 2 || fr->flag == 5) ?
+								mlx_hook(fr->win, 6, 65, mouse_move, fr) : 90;
 	mlx_mouse_hook(fr->win, mouse_release, fr);
 	ft_fractol(fr);
 	mlx_put_image_to_window(fr->mlx, fr->win, fr->img, 0, 0);
