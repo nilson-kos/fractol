@@ -24,10 +24,11 @@ t_fr		*ft_init_fr_key(t_fr *fr)
 	fr->key.miter = 0;
 	fr->key.move = 1;
 	fr->key.clr = 0;
+	fr->key.info = 1;
 	return (fr);
 }
 
-t_fr		*ft_init_fr(int flag)
+t_fr		*ft_init_fr(int flag, void *mlx)
 {
 	t_fr	*fr;
 
@@ -38,7 +39,10 @@ t_fr		*ft_init_fr(int flag)
 	fr->color = 0x111111;
 	fr->w_size_x = 800;
 	fr->w_size_y = 800;
-	fr->mlx = mlx_init();
+	if (mlx == NULL)
+		fr->mlx = mlx_init();
+	else
+		fr->mlx = mlx;
 	fr->shiftx = 0.0;
 	fr->shifty = 0.0;
 	fr->zoom = 4.0;

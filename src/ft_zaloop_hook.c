@@ -18,7 +18,10 @@ int		button_press(int kcode, t_fr *fr)
 	if (kcode == 8)
 		fr->trash = ft_change_color(fr);
 	if (kcode == 49)
-		ft_return_norm(fr);
+		fr->trash = ft_return_norm(fr);
+	if (kcode == 2)
+		fr->trash = lsd_color(fr);
+	(kcode == 34) ? fr->key.info += 1 : 1;
 	(kcode == 29) ? fr->shiftx = 0 : 1;
 	(kcode == 29) ? fr->shifty = 0 : 1;
 	(kcode == 123) ? fr->key.l = 1 : 23;
@@ -98,6 +101,7 @@ int		ft_zaloop_hook(t_fr *fr)
 	(fr->key.mzoom != 0) ? fr->zoom *= 1.05 : 92;
 	(fr->key.miter != 0) ? fr->iter -= 1 : 91;
 	(fr->key.piter != 0) ? fr->iter += 1 : 91;
+	mlx_hook(fr->win, 17, 1L << 17, exit_x, fr);
 	mlx_hook(fr->win, 2, 1, button_press, fr);
 	mlx_hook(fr->win, 3, 2, button_release, fr);
 	(fr->flag == 2 || fr->flag == 5) ?
@@ -105,5 +109,9 @@ int		ft_zaloop_hook(t_fr *fr)
 	mlx_mouse_hook(fr->win, mouse_release, fr);
 	ft_fractol(fr);
 	mlx_put_image_to_window(fr->mlx, fr->win, fr->img, 0, 0);
+	if (fr->key.info % 2 == 0)
+		ft_info(fr);
+	else
+		ft_for_i(fr);
 	return (0);
 }

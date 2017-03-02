@@ -15,9 +15,8 @@
 
 # include <math.h>
 # include "mlx.h"
-
-# include <stdio.h>
-
+# include <time.h>
+# include <stdlib.h>
 # include "../libft/libft.h"
 
 typedef struct		s_color
@@ -39,6 +38,7 @@ typedef struct		s_key
 	int				miter;
 	int				move;
 	int				clr;
+	int				info;
 }					t_key;
 
 typedef struct		s_fr
@@ -69,17 +69,22 @@ typedef struct		s_fr
 	struct s_key	key;
 }					t_fr;
 
-int		ft_check_flag(char *str);
-t_fr	*ft_init_fr(int flag);
-void	ft_fractol(t_fr *fr);
-void	ft_mandel(t_fr *fr);
-void	ft_julia(t_fr *fr);
-void	ft_fabsj(t_fr *fr);
-void	ft_burning_ship(t_fr *fr);
-void	ft_bio(t_fr *fr);
-int		ft_shake_color(t_fr *fr);
-int		ft_zaloop_hook(t_fr *fr);
-int		ft_change_color(t_fr *fr);
-void	ft_pix_put(t_fr *fr, int x, int y, int rgb);
+int					ft_check_flag(char *str);
+t_fr				*ft_init_fr(int flag, void *mlx);
+void				ft_fractol(t_fr *fr);
+void				ft_mandel(t_fr *fr);
+void				ft_julia(t_fr *fr);
+void				ft_fabsj(t_fr *fr);
+void				ft_burning_ship(t_fr *fr);
+void				ft_bio(t_fr *fr);
+int					ft_shake_color(t_fr *fr);
+int					ft_zaloop_hook(t_fr *fr);
+int					ft_return_norm(t_fr *fr);
+int					ft_change_color(t_fr *fr);
+int					lsd_color(t_fr *fr);
+int					exit_x(void *par);
+void				ft_info(t_fr *fr);
+void				ft_for_i(t_fr *fr);
+void				ft_pix_put(t_fr *fr, int x, int y, int rgb);
 
 #endif

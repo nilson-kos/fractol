@@ -15,6 +15,7 @@
 void	ft_put_info(void)
 {
 	ft_putstr("usage: ./fractol <char>\n");
+	ft_putstr("for double usage: ./fractol <char> <char>\n");
 	ft_putstr("M for mandelbrot\n");
 	ft_putstr("J for julia\n");
 	ft_putstr("S for burning ship\n");
